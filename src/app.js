@@ -1,9 +1,9 @@
 let name = 'Agnes';
-console.log(typeof name);
+//console.log(typeof name);
 
 let nameArr = ['Agnes', 'Nil', 'Sira', 'Rafa', 'Eva', 'Esther', 'SW']
 for (let item of nameArr) {
-    console.log(item)
+    //console.log(item)
 }
 
 const user = {
@@ -12,7 +12,7 @@ const user = {
     msg: `Hi, I'm ${name}`,
     //mètode
     saludar: function sayHi() {
-        console.log(this.msg)
+        //console.log(this.msg)
     }
 }
 
@@ -28,19 +28,34 @@ function sumaArray(arr) {
     return suma;
 }
 
-function renderToDos(arr){
-    const list = document.getElementById('list');
-    
-    arr.forEach(el => {
-        let listItem = document.createElement('li');
-        listItem.innerText = el;
-        listItem.classList.add('li_unclicked')
-        listItem.onclick = ()=>{
-            listItem.classList.toggle('li_clicked')
-        }
-        list.appendChild(listItem);
-    });
+// function renderToDos(arr) {
+//     const list = document.getElementById('list');
 
+//     arr.forEach(el => {
+//         let listItem = document.createElement('li');
+//         listItem.innerText = el;
+//         listItem.classList.add('li_unclicked')
+//         listItem.onclick = () => {
+//             listItem.classList.toggle('li_clicked')
+//         }
+//         list.appendChild(listItem);
+//     });
+
+// }
+
+function toggleClass(e){
+    e.target.classList.toggle('li_clicked');
+}
+
+function createToDo(el) {
+    const list = document.getElementById('list');
+    let element = `<li class="li_unclicked" onclick="toggleClass(event)">${el}</li>`
+    
+    list.innerHTML += element
+}
+
+function printToDo(arr) {
+   arr.map((el) => createToDo(el));
 }
 
 function init() {
@@ -61,7 +76,8 @@ function init() {
         'Anar al gimnàs',
 
     ]
-    renderToDos(toDoList);
+    //renderToDos(toDoList);
+    printToDo(toDoList);
 }
 
 init();
